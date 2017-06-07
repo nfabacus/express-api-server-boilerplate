@@ -1,0 +1,28 @@
+{
+  "name": "express-api-server-boilerplate",
+  "version": "1.0.0",
+  "description": "boilerplate for express api server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nfabacus/express-api-server-boilerplate.git"
+  },
+  "author": "Noby Fujioka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nfabacus/express-api-server-boilerplate/issues"
+  },
+  "homepage": "https://github.com/nfabacus/express-api-server-boilerplate#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-validator": "^3.2.0",
+    "mongoose": "^4.10.4",
+    "morgan": "^1.8.2",
+    "nodemon": "^1.11.0"
+  }
+}
