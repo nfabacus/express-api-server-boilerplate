@@ -9,7 +9,7 @@ exports.signup = function(req, res, next) {
   const username = req.sanitize('username').trim(); //trim any spaces before and after the value.
   const password = req.sanitize('password').trim(); //trim any spaces before and after the value.
   const studentType = 0;
-  const admin = 0;
+  const adminType = 0;
   const parent = true;
 
   req.checkBody({
@@ -54,7 +54,7 @@ exports.signup = function(req, res, next) {
         email: email,
         username: username,
         password: password,
-        admin: admin,
+        adminType: adminType,
         parent: parent,
         studentType: studentType
       });
