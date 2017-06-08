@@ -1,0 +1,5 @@
+// Application secrets and config
+// Make sure to gitignore this file!!
+module.exports = {
+  secret: 'putyourscretkeyhere'
+};

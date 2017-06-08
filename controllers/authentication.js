@@ -1,5 +1,14 @@
 const User = require('../models/user');
+const jwt = require('jwt-simple');
+const config = require('../config');
 
+// Function to create jwt token for user. 'sub' means 'subject' for the token. 'iat' means 'issued at' (time).
+// You can send other information such as adminType, parent, studentType.
+function createUserToken(user) {
+  const timestamp = new Date().getTime();
+  const payload = { sub: user.id, iat: timestamp, adminType: user.adminType, parent: user.parent, studentType: user.studentType };
+  return jwt.encode(payload, config.secret);
+}
 
 exports.signup = function(req, res, next) {
   // const email = req.body.email;
@@ -61,12 +70,10 @@ exports.signup = function(req, res, next) {
 
       user.save(function(err){
         if(err) { return next(err); }
-        // Respond to request indicating the user was created
-        res.json({ success: true });
+        //Use CreateUserToken function at the top of this file. Create a User JWT token and send it back as a response.
+        res.json({ token: createUserToken(user) });
         });
       });
-
-
 
   });
 
