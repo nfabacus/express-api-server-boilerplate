@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // *** Define user model ****
 // Inside the schema, set properties of the model, such as email, username,etc.
 const userSchema = new Schema({
-  email: { type: String, unique: true, lowercase: true },
+  email: { type: String, lowercase: true },
   username: { type: String, unique: true, lowercase: true },
   password: String,
   admin: Number,

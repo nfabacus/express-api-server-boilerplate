@@ -10,6 +10,7 @@ const router = require('./router');
 
 // *** DB Setup - connect mongoose to specific mongoDB ***
 const mongoose = require('mongoose'); //ORM for mongoDB
+mongoose.Promise = global.Promise;  //This is required to avoid warning message when using the latest mongoose 4.10.
 mongoose.connect('mongodb://localhost/my-api-db');
 
 

@@ -42,21 +42,32 @@ exports.signup = function(req, res, next) {
     // Check if a user with the username already exists
     User.findOne({ username: username }, function(err, existingUser){
       //In case it returns some error e.g. database connection error, return the error.
-      
-    });
-    // If the user already exists, then return an error.
+      if(err) { return next(err); }
+
+      // If the user already exists, then return an error.
+      if(existingUser) {
+        return res.status(422).send({ error: 'This username is already taken. Please choose a different username.' });
+      }
+
+      // If a user with username does NOT exist, create and save user record
+      const user = new User({
+        email: email,
+        username: username,
+        password: password,
+        admin: admin,
+        parent: parent,
+        studentType: studentType
+      });
+
+      user.save(function(err){
+        if(err) { return next(err); }
+        // Respond to request indicating the user was created
+        res.json({ success: true });
+        });
+      });
 
 
-    // If a user with username does NOT exist, create and save user record
-
-    // Respond to request indicating the user was created
 
   });
-
-  // return res.send({ message: "Success!"});
-  // if(!email || !username || !password ) {
-  //   return res.status(422).send({ error: 'Please provide email, username, and password.'});
-  // }
-
 
 }
