@@ -79,7 +79,7 @@ exports.signup = function(req, res, next) {
 }
 
 exports.signin = function(req, res, next) {
-  // User has already had their username and password auth'd
+  // User has already had their username and password authenticated
   // so, got req.user.
   // We just need to give them a token.
   res.send({ token: createUserToken(req.user) });

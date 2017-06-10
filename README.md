@@ -30,6 +30,7 @@ npm run dev
 
 ### Create models for mongoDB using mongoose
   For example, user.js
+  *** Make sure to install and use bcrypt for password encryption.
 
 ### Add validation to user inputs in your controller (e.g. authentication)
   1. Install express-validator
@@ -70,13 +71,24 @@ npm run dev
 
 ### Installing Passport (authentication middleware for express js/node.js)
   1. install passport passport-jwt    
-        npm install --save passport passport-jwt   
+        npm install --save passport passport-jwt passport-local  
+    * Passport is a authentication middleware for express js/node.js   
+    * You can have different strategies for authentication.   
+    * passport-jwt is a passport strategy which verifies user with a JWT.   
+    * passport-local is a passport strategy which verifies user with login credentials (username or email and password).   
 
-    * Passport is a authentication middleware for express js/node.js
-    * passport-jwt is a passport strategy(library) which verifies user with a JWT.
-    * You can have different strategies for authentication.
   2. Write strategies for Passport authentication middleware
     1) Create a folder called 'services', and create a file called passport.js in the folder.   
     2) In passport.js, write two strategies (the ways to authenticate users) and connect them to passport, so we can use it.
-      Strategy 1: Signin -> Local Strategy: Verify Email and password -> Give token.
-      Strategy 2: authenticated routes/requests -> JWT Strategy: Verify token -> Provide access
+      Strategy 1: Signin -> Local Strategy: Verify Email and password -> Give token and user object.
+      Strategy 2: Allow access to specific routes only with correct JWT token -> JWT Strategy: Verify token -> Provide user object and access
+
+### Apply authentication from passport and your own controllers
+
+### Cors Setup
+  1. Install cors   
+    npm install --save cors   
+  2. Require cors in index.js in the root   
+  3. Connect it as a middleware to the app   
+      app.use(cors()); //Connect cors to the app   
+  This will allow access to the server from any domains, subdomains, ports.   
