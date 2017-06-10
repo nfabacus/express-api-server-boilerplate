@@ -4,7 +4,7 @@
 ### To run the dev server
 
 * Make sure to start mongo database first
-```
+```%%%%%%%%%S
 mongod
 ```
 * Then, go and run api server.
@@ -53,3 +53,28 @@ npm run dev
   3. Require jwt and config into your controller (e.g. authentication.js)   
     const jwt = require('jwt-simple');   
     const config = require('../config');   
+
+  4. Create and use a function to create a jwt token.
+  e.g. authentication.js
+  ```     
+  // Function to create jwt token for user. 'sub' means 'subject' for the token. 'iat' means 'issued at' (time).
+  // You can send other information such as adminType, parent, studentType.
+  function createUserToken(user) {
+    const timestamp = new Date().getTime();
+    const payload = { sub: user.id, iat: timestamp, adminType: user.adminType, parent: user.parent, studentType: user.studentType };
+    return jwt.encode(payload, config.secret);
+  }
+  ```   
+  5. authentication.signup (authentication.js)   
+    After user input valification, execute the 'createUserToken' function and send back the token.
+
+### Installing Passport (authentication middleware for express js/node.js)
+  1. install passport passport-jwt    
+        npm install --save passport passport-jwt   
+
+    * Passport is a authentication middleware for express js/node.js
+    * passport-jwt is a passport strategy(library) which verifies user with a JWT.
+    * You can have different strategies for authentication.
+  2. Write strategies for Passport authentication middleware
+    1) Create a folder called 'services', and create a file called passport.js in the folder.   
+    2) In passport.js, write strategies (the ways to authenticate users) and connect them to passport, so we can use it.
