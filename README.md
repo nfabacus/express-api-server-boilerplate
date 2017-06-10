@@ -4,7 +4,7 @@
 ### To run the dev server
 
 * Make sure to start mongo database first
-```%%%%%%%%%S
+```
 mongod
 ```
 * Then, go and run api server.
@@ -77,4 +77,6 @@ npm run dev
     * You can have different strategies for authentication.
   2. Write strategies for Passport authentication middleware
     1) Create a folder called 'services', and create a file called passport.js in the folder.   
-    2) In passport.js, write strategies (the ways to authenticate users) and connect them to passport, so we can use it.
+    2) In passport.js, write two strategies (the ways to authenticate users) and connect them to passport, so we can use it.
+      Strategy 1: Signin -> Local Strategy: Verify Email and password -> Give token.
+      Strategy 2: authenticated routes/requests -> JWT Strategy: Verify token -> Provide access

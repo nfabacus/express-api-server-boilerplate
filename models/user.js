@@ -33,6 +33,19 @@ userSchema.pre('save', function(next) { //When we try to save a model, this func
   });
 });
 
+
+// adds method userSchema in order to compare passwords when logging in
+userSchema.methods.comparePassword = function(candidatePassword, callback) {
+  // candidatePassword is the password submitted by a user.
+  // this.password is the user model's password
+  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+    if(err) { return callback(err); }
+    //bcrypt automatically hashes the candidatePassword, and compare with the user's encrypted password.
+    callback(null, isMatch);
+  });
+}
+
+
 // *** Create the model class ***
 const ModelClass = mongoose.model('user', userSchema);
 
