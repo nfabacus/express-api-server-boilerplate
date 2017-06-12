@@ -33,5 +33,11 @@ module.exports = function(app) {
 
   app.post('/pages', PageController.createPage);
 
+  // Preload page object on route with ':page'
+  app.param('page', PageController.getPageFromPageUrl);
 
+  app.get('/pages/:page', PageController.getPage);
+
+  //create a new subcontent
+  app.post('/pages/:page/subcontents', PageController.createSubcontent);
 }
