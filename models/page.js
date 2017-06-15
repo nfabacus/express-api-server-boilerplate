@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PageSchema = new Schema({
   url: { type: String, required: true, lowercase: true, unique: true },
-  title: { type: String, required: true },
+  title: { type: String, required: [true, 'Title is required'] },
   content: { type: String, required: true },
   subcontents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Subcontent' }]
 });

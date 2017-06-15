@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt-nodejs');
 // *** Define user model ****
 // Inside the schema, set properties of the model, such as email, username,etc.
 const UserSchema = new Schema({
-  email: { type: String, required: true, lowercase: true },
-  username: { type: String, required: true, unique: true, lowercase: true },
-  password: { type: String, required: true },
+  email: { type: String, required: [true, 'Email is required'], lowercase: true },
+  username: { type: String, required: [true, 'Username is required'], unique: true, lowercase: true },
+  password: { type: String, required: [true, 'Password is required'] },
   adminType: Number,
   parent: Boolean,
   studentType: Number

@@ -23,7 +23,7 @@ exports.getPageFromPageUrl = function(req, res, next, pageUrl) {
 }
 
 exports.getPage = function(req, res, next) {
-  req.page.populate('Subcontent', function(err, page) {
+  req.page.populate('subcontents', function(err, page) {
     res.json(page);
   })
 }
