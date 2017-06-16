@@ -41,13 +41,20 @@ exports.createPage = function (req, res, next) {
 exports.updatePage = function (req, res, next) {
   // console.log("REQ.PAGE: ", req.page); //req.page is the json data received from the getPageFromPageUrl function.
   // console.log("REQ.BODY: ", req.body); //req.body is the json data sending from the route.
-  req.page.update(req.body, function(err, page){
+  req.page.update(req.body, function(err, success){
+    if(err) { return next(err); }
+
+    res.json(success);
+  });
+}
+
+exports.deletePage = function(req, res, next) {
+  req.page.remove(function(err, page){
     if(err) { return next(err); }
 
     res.json(page);
   });
 }
-
 // exports.createSubcontent = function (req, res, next) {
 //   const subcontent = new Subcontent(req.body);
 //   subcontent.page = req.page;
