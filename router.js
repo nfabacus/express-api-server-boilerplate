@@ -38,6 +38,9 @@ module.exports = function(app) {
 
   app.get('/pages/:page', PageController.getPage);
 
-  //create a new subcontent
-  app.post('/pages/:page/subcontents', PageController.createSubcontent);
+  app.put('/pages/:page', PageController.updatePage);
+
+  
+  // //create a new subcontent
+  // app.post('/pages/:page/subcontents', PageController.createSubcontent);
 }
