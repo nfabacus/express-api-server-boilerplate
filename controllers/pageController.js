@@ -27,19 +27,25 @@ exports.getPage = function(req, res, next) {
   // })
 }
 
-function validateUrl(pageUrl) {
+function isValidUrl(pageUrl) {
   const spaces = /\s/g; //regex for spaces
   const upperCases = /[A-Z]/g;
 
   if(spaces.test(pageUrl) || upperCases.test(pageUrl)) {
-    return true;
-  } else {
     return false;
   }
+
+  // Page.findOne({ url: pageUrl }, function(err, page){
+  //   if(err) { return next(false); }
+  //   if(page) { return false; }
+  // })
+
+  return true;
+
 }
 
 exports.createPage = function (req, res, next) {
-  if(validateUrl(req.body.url)) {
+  if(!isValidUrl(req.body.url)) {
     res.json({"error": "Please remove all spaces for url. Url must also be lower-case."});
   } else {
     const page = new Page(req.body);
@@ -54,7 +60,7 @@ exports.createPage = function (req, res, next) {
 exports.updatePage = function (req, res, next) {
   // console.log("REQ.PAGE: ", req.page); //req.page is the json data received from the getPageFromPageUrl function.
   // console.log("REQ.BODY: ", req.body); //req.body is the json data sending from the route.
-  if(validateUrl(req.body.url)) {
+  if(!isValidUrl(req.body.url)) {
     res.json({"error": "Please remove all spaces for url. Url must also be lower-case."});
   } else {
     req.page.update(req.body, function(err, page){
