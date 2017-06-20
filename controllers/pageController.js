@@ -9,6 +9,14 @@ exports.getPages = function (req, res, next) {
   });
 }
 
+exports.getNavLinks = function (req, res, next) {
+  Page.find({ published: true, navLink: true }, 'url title', function(err, links){
+    if(err) { return next(err); }
+
+    res.json(links);
+  });
+}
+
 exports.getPageFromPageUrl = function(req, res, next, pageUrl) {
   const query = Page.findOne({ url: pageUrl });
 

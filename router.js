@@ -12,7 +12,7 @@ const loginAuth = passport.authenticate('local', { session: false }); //tells pa
 
 
 module.exports = function(app) {
-  app.get('/', HelloWorld.sayHello);
+  app.get('/hello', HelloWorld.sayHello);
   app.get('/dashboard', JWTAuth, HelloWorld.sayHello); //JWTAuth will check token and user. If the token is okay, move to next (HelloWorld.sayHello).
   app.post('/signup', Authentication.signup); //check and create a user, and create and provide a new token for the user.
   app.post('/signin', loginAuth, Authentication.signin); //check username and password (loginAuth), and create and provide a new token(Authentication.signin) if username and password are correct.
@@ -29,6 +29,8 @@ module.exports = function(app) {
     res.send({ message: "Welcome to Students page."});
   });
 
+  app.get('/navlinks', PageController.getNavLinks);
+
   app.get('/pages', PageController.getPages);
 
   app.post('/pages', PageController.createPage);
@@ -41,6 +43,9 @@ module.exports = function(app) {
 
   app.delete('/pages/:page', PageController.deletePage);
 
+  app.get('/*', function(req, res, next){
+    res.send('any page');
+  });
   // //create a new subcontent
   // app.post('/pages/:page/subcontents', PageController.createSubcontent);
 }

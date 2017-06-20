@@ -4,7 +4,9 @@ const PageSubcontentSchema = require('./pageSubcontentSchema');
 
 const PageSchema = new Schema({
   url: { type: String, required: true, lowercase: true, unique: true },
-  title: { type: String, required: [true, 'Title is required'] },
+  published: { type: Boolean, default: false },
+  navLink: { type: Boolean, default: false },
+  title: { type: String, required: [true, 'Title is required.'] },
   content: { type: String, required: true },
   subcontents: [PageSubcontentSchema]
 });
