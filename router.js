@@ -43,9 +43,4 @@ module.exports = function(app) {
 
   app.delete('/pages/:page', PageController.deletePage);
 
-  app.get('/*', function(req, res, next){
-    res.send('any page');
-  });
-  // //create a new subcontent
-  // app.post('/pages/:page/subcontents', PageController.createSubcontent);
 }
